@@ -9,7 +9,7 @@ import {
 } from './data.js';
 
 let page = 1;
-let matches = books;
+let matches = books.slice(0,BOOKS_PER_PAGE);
 
 const domElements = {
     search:{
@@ -60,20 +60,27 @@ const createPreview = (id, image, title, authors) => {
     `;
     return element
 }
-
-/**  
- * Apply the book previews to the initial page.
-*/
-const initializePreviews = () => {
-    const startingFragment = document.createDocumentFragment();
+/**
+ * This is a function that creates collects the data needed to create a preview Html
+ * This function basically loops through the books object and collects the data according to the process 
+ * It then continues to use the {@link createPreview()} to create book preview elements
+ */
+const createBookHtml = () => {
     
-    for (const {author, id, image, title} of books.slice(0,BOOKS_PER_PAGE)){
+    const startingFragment = document.createDocumentFragment();
+    for (const {author, id, image, title} of matches){
         const authorName = authors[author];
         const previewElement = createPreview(id, image, title, authorName );
         startingFragment.appendChild (previewElement);
     }
-
-    domElements.list.listItemsContainer.appendChild(startingFragment);
+    return startingFragment;
+}
+/**  
+ * Apply the book previews to the initial page.
+*/
+const initializePreviews = () => {
+    
+    domElements.list.listItemsContainer.appendChild(createBookHtml());
 };
 
 // Update the book previews based on search filters 
@@ -95,7 +102,7 @@ const updatePreviews = () => {
     }
 
     page = 1;
-    matches = filteredBooks;
+    matches = filteredBooks.slice(0, BOOKS_PER_PAGE);
 
     if (filteredBooks.length < 1) {
         domElements.list.listMessage.classList.add('list__message_show')
@@ -103,16 +110,9 @@ const updatePreviews = () => {
         domElements.list.listMessage.classList.remove('list__message_show')
     }
 
-    domElements.list.listItemsContainer.innerHTML = '';
-    const newItemsFragment = document.createDocumentFragment();
-
-    for (const { author, id, image, title } of filteredBooks.slice(0, BOOKS_PER_PAGE)) {
-        const authorName = authors[author];
-        const previewElement = createPreview(id, image, title, authorName);
-        newItemsFragment.appendChild(previewElement);
-      }
-    
-      domElements.list.listItemsContainer.appendChild(newItemsFragment);
+    domElements.list.listItemsContainer.innerHTML = ''
+ 
+      domElements.list.listItemsContainer.appendChild(createBookHtml());
       domElements.list.listButton.disabled = (filteredBooks.length - (page * BOOKS_PER_PAGE)) < 1;
     
       domElements.list.listButton.innerHTML = `
@@ -183,12 +183,13 @@ document.addEventListener('DOMContentLoaded', () => {
       document.documentElement.style.setProperty('--color-light', '255, 255, 255');
     }
   
-    domElements.list.listButton.innerText = `Show more (${books.length - BOOKS_PER_PAGE})`;
+    ;
     domElements.list.listButton.disabled = (matches.length - (page * BOOKS_PER_PAGE)) < 0;
-  
+    
+    
     domElements.list.listButton.innerHTML = `
       <span>Show more</span>
-      <span class="list__remaining"> (${(matches.length - (page * BOOKS_PER_PAGE)) > 0 ? (matches.length - (page * BOOKS_PER_PAGE)) : 0})</span>
+      <span class="list__remaining" data-list-remaining>(${(matches.length - (page * BOOKS_PER_PAGE))})</span>
     `;
   }); 
   
@@ -228,13 +229,12 @@ domElements.search.searchAuthorsSelect.appendChild(authorOptionsFragment);
 
 domElements.list.listButton.addEventListener('click', () => {
     const fragment = document.createDocumentFragment();
-  
-    for (const { author, id, image, title } of matches.slice(page * BOOKS_PER_PAGE, (page + 1) * BOOKS_PER_PAGE)) {
-      const element = createPreview(id, image, title, authors[author]);
-      fragment.appendChild(element);
-    }
-  
-    document.querySelector('[data-list-items]').appendChild(fragment);
+
+    matches = books.slice(page * BOOKS_PER_PAGE, (page + 1) * BOOKS_PER_PAGE)
+    
+    const booksNotShoewing = (matches.length - (page * BOOKS_PER_PAGE)) > 0 ? (matches.length - (page * BOOKS_PER_PAGE)) : 0
+    document.querySelector('[data-list-remaining]').innerText = booksNotShoewing
+    document.querySelector('[data-list-items]').appendChild(createBookHtml());
     page += 1;
   });
 
