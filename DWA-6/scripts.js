@@ -11,6 +11,13 @@ import {
 let page = 1;
 let matches = books.slice(0,BOOKS_PER_PAGE);
 
+/**
+ * An object literal that contains references to all the HTML elements
+ * referenced through the operation of the app either upon initialisation or
+ * while its running (via event listeners). This ensure that all UI elements can
+ * be accessed and seen in a structured manner in a single data structure.
+ */
+
 const domElements = {
     search:{
         searchForm : document.querySelector('[data-search-form]'),
@@ -60,6 +67,7 @@ const createPreview = (id, image, title, authors) => {
     `;
     return element
 }
+
 /**
  * This is a function that creates collects the data needed to create a preview Html
  * This function basically loops through the books object and collects the data according to the process 
@@ -75,11 +83,9 @@ const createBookHtml = () => {
     }
     return startingFragment;
 }
-/**  
- * Apply the book previews to the initial page.
-*/
+
+// Apply the book previews to the initial page.
 const initializePreviews = () => {
-    
     domElements.list.listItemsContainer.appendChild(createBookHtml());
 };
 
