@@ -71,7 +71,8 @@ const createPreview = (id, image, title, authors) => {
 /**
  * This is a function that creates collects the data needed to create a preview Html
  * This function basically loops through the books object and collects the data according to the process 
- * It then continues to use the {@link createPreview()} to create book preview elements
+ * It then continues to use the {@link createPreview()} to create book preview elements\
+ * @returns {HTMLElement} 
  */
 const createBookHtml = () => {
     
@@ -232,7 +233,6 @@ for (const [id, name] of Object.entries(authors)) {
 domElements.search.searchAuthorsSelect.appendChild(authorOptionsFragment);
 
 // Load more books on "Show more" button click.
-
 domElements.list.listButton.addEventListener('click', () => {
     const fragment = document.createDocumentFragment();
 
