@@ -1,3 +1,4 @@
+import { domElements } from "./UI-script.js";
 
 export const BOOKS_PER_PAGE = 36;
 
@@ -25411,3 +25412,35 @@ export const books = [
     "author": "8e7083f4-7613-4872-a21b-62fbe33fe180"
   }
 ]
+
+export const getFilterData = () => {
+  const formData = new FormData(domElements.search.searchForm)
+    const filters = Object.fromEntries(formData)
+
+    return filters;
+}
+
+/**
+ * This function loops over the books and checks which ones match with
+ * its filters. The result is then pushed to a variable 
+ * @returns {Array} a collection of the filtered Books 
+ */
+export const filterBooks = () => {
+  const filters = getFilterData()
+  const filteredBooks = []
+
+  for (const book of books){
+    const genreMatch = filters.genre === 'any' || book.genres.includes(filters.genre)
+
+    if (
+        (filters.title.trim() === '' || book.title.toLowerCase().includes(filters.title.toLocaleLowerCase())) &&
+        (filters.author === 'any' || book.author === filters.author) && 
+        genreMatch
+    ) {
+        filteredBooks.push(book)
+        
+    } 
+}
+return (filteredBooks)
+ 
+};
