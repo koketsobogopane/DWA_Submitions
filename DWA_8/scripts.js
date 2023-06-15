@@ -6,6 +6,7 @@ import {
     genres, 
     BOOKS_PER_PAGE,
     filterBooks,
+    getFilterData
 
 } from './data.js';
 
@@ -43,12 +44,10 @@ const initializePreviews = () => {
 
 // Update the book previews based on search filters 
 const updatePreviews = () => {
-
- //fetching our seach data/filtering specifications   
-   
+     
     
  //filtering our Books according to the search result 
- const filteredBooks = filterBooks()
+ const filteredBooks = filterBooks(getFilterData())
 
   
 
@@ -212,7 +211,7 @@ domElements.list.listItemsContainer.addEventListener('click', (event) => {
     domElements.list.listActiveOverlay.open= false;
   });
   
-  
+
   
   
   

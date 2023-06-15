@@ -25425,8 +25425,8 @@ export const getFilterData = () => {
  * its filters. The result is then pushed to a variable 
  * @returns {Array} a collection of the filtered Books 
  */
-export const filterBooks = () => {
-  const filters = getFilterData()
+export const filterBooks = (filterData) => {
+  const filters = filterData 
   const filteredBooks = []
 
   for (const book of books){
@@ -25441,6 +25441,6 @@ export const filterBooks = () => {
         
     } 
 }
-return (filteredBooks)
+return filteredBooks
  
 };
