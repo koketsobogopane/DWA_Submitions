@@ -44,12 +44,9 @@ const initializePreviews = () => {
 
 // Update the book previews based on search filters 
 const updatePreviews = () => {
-     
-    
+       
  //filtering our Books according to the search result 
  const filteredBooks = filterBooks(getFilterData())
-
-  
 
 //Update the view port with the new filtered list 
     page = 1;
@@ -57,13 +54,11 @@ const updatePreviews = () => {
 
 
     domElements.list.listItemsContainer.innerHTML = ''
- 
       domElements.list.listItemsContainer.appendChild(createBookHtml());
-      domElements.list.listButton.disabled = (filteredBooks.length - (page * BOOKS_PER_PAGE)) < 1;
-    
+      domElements.list.listButton.disabled = (books.length - (page * BOOKS_PER_PAGE)) < 1;
       domElements.list.listButton.innerHTML = `
         <span>Show more</span>
-        <span class="list__remaining"> (${(filteredBooks.length - (page * BOOKS_PER_PAGE)) > 0 ? (filteredBooks.length - (page * BOOKS_PER_PAGE)) : 0})</span>
+        <span class="list__remaining"> (${(books.length - (page * BOOKS_PER_PAGE)) > 0 ? (books.length - (page * BOOKS_PER_PAGE)) : 0})</span>
       `;
     };
 

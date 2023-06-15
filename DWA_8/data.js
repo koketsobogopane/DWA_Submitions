@@ -25423,6 +25423,7 @@ export const getFilterData = () => {
 /**
  * This function loops over the books and checks which ones match with
  * its filters. The result is then pushed to a variable 
+ * @param {object} - an object of the filtered data from {@link getFilterData()}
  * @returns {Array} a collection of the filtered Books 
  */
 export const filterBooks = (filterData) => {
