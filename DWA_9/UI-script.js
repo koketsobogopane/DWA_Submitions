@@ -38,19 +38,18 @@ export const domElements = {
  * @return {HTMLElement} The preview element for the book.
  */
     export const createPreview = (id, image, title, authors) => {
-        const element = document.createElement('button');
-        element.classList = 'preview';
+        const element = document.createElement('book-preview');
         element.setAttribute('data-preview', id);
 
     element.innerHTML = `
-            <img
-                class="preview__image"
+            <img slot = 'bookImage' 
+            class="preview__image"
                 src="${image}"
             />
-            <div class="preview__info">
-                <h3 class="preview__title">${title}</h3>
-                <div class="preview__author">${authors}</div>
-            </div>
+                <h3 slot ="bookTitle">${title}</h3>
+                <div slot ="bookAuthor">${authors}</div>
         `;
+        
+
         return element
     }

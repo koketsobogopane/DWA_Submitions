@@ -1,3 +1,4 @@
+import { books } from "../data.js";
 const template = document.createElement('template');
 const element = document.createElement('button');
 element.classList = 'preview';
@@ -74,10 +75,13 @@ template.innerHTML = `
 
 </style>
 <button class = 'preview' data-preview >
-        <img class="preview__image" src=https://images.unsplash.com/photo-1603162610423-af7febeca563?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJpZGUlMjBhbmQlMjBwcmVqdWRpY2UlMjBib29rJTIwY292ZXJ8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=1000&q=60/>
+
+        <slot name = 'bookImage'>
+          <img class="preview__image" src=https://images.unsplash.com/photo-1603162610423-af7febeca563?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJpZGUlMjBhbmQlMjBwcmVqdWRpY2UlMjBib29rJTIwY292ZXJ8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=1000&q=60 />
+</slot>
     <div class="preview__info">
-        <h3 class="preview__title"><slot>Pride and Prejudice</slot></h3>
-        <div class="preview__author"><slot>Jane Austen</slot></div>
+        <h3 class="preview__title"><slot name ='bookTitle'>Pride and Prejudice</slot></h3>
+        <div class="preview__author"><slot name ='bookAuthor'>Jane Austen</slot></div>
     </div>
 </button>
 `;
@@ -112,7 +116,21 @@ customElements.define(
         this.inner.appendChild(content.cloneNode(true))
         
         this.addEventListener('click',(event) => {
-          console.log ('it is working!!!')
+          const previewButton = event.target.closest('book-preview');
+    if (previewButton) {
+      const activeBookId = previewButton.getAttribute('data-preview');
+      const activeBook = books.find((book) => book.id === activeBookId);
+  
+      if (activeBook) {
+        document.querySelector('[data-list-active]').open = true;
+        document.querySelector('[data-list-blur]').src = activeBook.image;
+        document.querySelector('[data-list-image]').src = activeBook.image;
+        document.querySelector('[data-list-title]').innerText = activeBook.title;
+        document.querySelector('[data-list-subtitle]').innerText = `${authors[activeBook.author]} (${new Date(activeBook.published).getFullYear()})`;
+        document.querySelector('[data-list-description]').innerText = activeBook.description;
+      }
+    }
+  
         })
     }    
 }
