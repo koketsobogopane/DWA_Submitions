@@ -1,4 +1,5 @@
-import { books } from "../data.js";
+import { books, authors } from "../data.js";
+
 const template = document.createElement('template');
 const element = document.createElement('button');
 element.classList = 'preview';
