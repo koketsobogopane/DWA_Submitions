@@ -1,5 +1,5 @@
 // Fully working scripts.js file
-
+import './components/book-preview.js'
 import { 
     books, 
     authors, 
@@ -207,7 +207,6 @@ domElements.list.listItemsContainer.addEventListener('click', (event) => {
   });
   
 
-  
-  
+ 
   
   
