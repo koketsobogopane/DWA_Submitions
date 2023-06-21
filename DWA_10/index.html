@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="module" src="./script.js" defer></script>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.5.0/cdn/themes/light.css" />
+<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.5.0/cdn/shoelace-autoloader.js" defer></script>
+
+</head>
+<body>
+    <div class="container">
+    <div class="counterDisplay">
+        <sl-input size="small" readonly placeholder="0" data-key="number"></sl-input>
+    </div>
+    <div class="counterButtons">
+    <sl-button data-key="add">+</sl-button>
+    <sl-button data-key="subtract">-</sl-button>
+    </div>
+    <div class="resetButton">
+    <sl-button size="medium" pill>Reset</sl-button>
+    <sl-alert >
+        <sl-icon slot="icon" name="info-circle"></sl-icon>
+        The counter has been reset 
+      </sl-alert>
+      
+    </div>
+    </div>
+</body>
+</html>

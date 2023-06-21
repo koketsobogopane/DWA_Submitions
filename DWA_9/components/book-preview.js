@@ -75,11 +75,12 @@ template.innerHTML = `
   }
 
 </style>
-<button class = 'preview' data-preview >
-
+<button class='preview' data-preview >
+<div class = 'preview__image'>
         <slot name = 'bookImage'>
-          <img class="preview__image" src=https://images.unsplash.com/photo-1603162610423-af7febeca563?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJpZGUlMjBhbmQlMjBwcmVqdWRpY2UlMjBib29rJTIwY292ZXJ8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=1000&q=60 />
+          <img src=https://images.unsplash.com/photo-1603162610423-af7febeca563?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJpZGUlMjBhbmQlMjBwcmVqdWRpY2UlMjBib29rJTIwY292ZXJ8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=1000&q=60 />
 </slot>
+</div>
     <div class="preview__info">
         <h3 class="preview__title"><slot name ='bookTitle'>Pride and Prejudice</slot></h3>
         <div class="preview__author"><slot name ='bookAuthor'>Jane Austen</slot></div>
@@ -131,7 +132,6 @@ customElements.define(
         document.querySelector('[data-list-description]').innerText = activeBook.description;
       }
     }
-  
         })
     }    
 }
