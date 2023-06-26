@@ -4,6 +4,7 @@ import { Action } from "./actions.js";
 /**
  * @param {State} state
  * @param {Action} action
+ * @return {object}
  */
 
 export const reducer = (state, action) => {
