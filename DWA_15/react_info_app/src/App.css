@@ -56,6 +56,10 @@ those other properties)
 main {
   padding: 57px 27px;
   color: white;
+  background-image: url(./assets/react-icon-large.png);
+  background-repeat: no-repeat;
+  /* Set position based on your design */
+  background-position: right 75%;
 }
 
 .main--title {
