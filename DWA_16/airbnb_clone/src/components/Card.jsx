@@ -1,27 +1,36 @@
 
-import cardIcon from "../assets/images/star.png"
+import cardIcon from "/images/star.png"
+
 /**
  * 
  * @param {object} props 
  * @returns {XmlElememts}
  */
 export default function Card(props){
-    const {img, rating, reviewCount, country, title, price, status} = props
-    console.log(img)
+    
+console.log (props.element.coverImg)
+    let badgeText
+    if (props.element.openSpots === 0) {
+        badgeText = "SOLD OUT"
+
+    } else if (props.element.location === "Online") {
+        badgeText = "ONLINE"
+    }
+
     return (
         <div className="card">
             <div className="image">
-            <div className="card--status">{status}</div>
-            <img src={`../assets/images/${img}.png`} className="card--image" />
+            {badgeText && <div className="card--status">{badgeText}</div>}
+            <img src={`/images/${props.element.coverImg}`} className="card--image" />
             
             </div>
             <div className="card--text">
                 <div className="card--text--hearder">
-                <img src={cardIcon} />{rating}<span className="gray">({reviewCount})•{country}</span>
+                <img src= {cardIcon} alt="" />{props.element.stats.rating}<span className="gray">({props.element.stats.reviewCount})•{props.element.location}</span>
                 </div>
-                <p>{title}
+                <p>{props.element.title}
 </p>
-                <p><span className="bold">From ${price}</span> / person
+                <p><span className="bold">From ${props.element.price}</span> / person
 </p>
             </div>
             

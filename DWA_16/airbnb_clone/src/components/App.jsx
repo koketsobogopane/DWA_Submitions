@@ -1,21 +1,24 @@
 import Navbar from "./Navbar"
-//import Hero from "./Hero"
+import Hero from "./Hero"
 import Card from "./Card"
+import data from "./data"
 
 
 export default function App() {
+    const usedData = data.map(element => {
+   return <Card 
+        key = {element.id}
+       element = {element}
+            />})
+
+
     return (
         <div>
             <Navbar />
-            <Card 
-                img = "katie-zaferes"
-                rating = "5.0"
-                reviewCount = {6}
-                country = "USA"
-                title = "Life Lessons with Katie Zaferes"
-                price = {136}
-                status = "Sold Out"
-            />
+            <Hero />
+            <section className="card-list">
+            {usedData}
+            </section>
         </div>
     )
 }

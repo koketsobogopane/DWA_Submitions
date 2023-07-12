@@ -1,4 +1,4 @@
-import PhotoGrid from '../assets/images/photo-grid.png'
+import PhotoGrid from '/images/photo-grid.png'
 
 export default function Hero() {
     // On scrim, a semantic "section" is used to cover the hero
